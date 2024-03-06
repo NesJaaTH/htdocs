@@ -1,7 +1,16 @@
 <?php
+	include "/xampp/htdocs/assets/php/connect.php";
 	session_start();
 	ob_start();
-	session_destroy();
+	$Incorrect = 'none';
+    if ($_SESSION['Incorrect'] === "Incorrect"){
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+		$Incorrect = $_SESSION['Incorrect'];
+    }else{
+
+    }
 ?>
 
 <!doctype html>
@@ -61,8 +70,15 @@
         <![endif]-->
 
     </head>
+	<?php 
+		if($Incorrect == "none"){
+			echo '<body>';
+		} else {
+			echo '<body onload="Incorrect()">';
+
+		}
+	?>
 	
-	<body>
 		<!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -263,9 +279,23 @@
         <script src="/assets/js/owl.carousel.min.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!--Custom JS-->
         <script src="/assets/js/custom.js"></script>
+
+		<script>
+			function Incorrect(){
+				Swal.fire({
+					title: "Username or Password?",
+					text: "ไม่ถูกต้อง",
+					icon: "error"
+				});
+
+				<?php $_SESSION['Incorrect']=('none'); ?>
+			}
+
+		</script>
         
     </body>
 	

@@ -41,7 +41,11 @@ $dbname = "databasesell";
                 die;
             }
         }else{
-            echo"Password Incorrect";
+            session_start();
+            ob_start();
+            $_SESSION['Incorrect']=('Incorrect');
+            header('location:http://localhost/signupandlogin/login.php');
+            die;
         }
     }
     mysqli_close( $conn );
