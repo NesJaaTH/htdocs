@@ -1,0 +1,98 @@
+@media screen and (max-width: 1440px) {
+    .welcome-hero-txt{
+        padding: 100px 0px 122px;
+    }    
+}
+
+.welcome-hero-txt{
+    padding: 120px 0px 122px;
+} 
+
+.signupcontainer{
+    padding-top: 10px;
+    background-color: rgba(255, 255, 255, 0.519);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 33%;
+    position: relative;
+    left: 35%;
+    height: 550px;
+}
+
+.signupcontainer .hertop{
+    font-size: 1.5em;
+}
+
+.signupcontainer label{
+    color: rgba(0, 0, 0, 0.586);
+    font-size: 1em;
+}
+
+.signupcontainer .textcss{
+    color: white;
+    position: relative;
+    text-align: left;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.445);
+    transition: .5s;
+}
+
+.signupcontainer .textcss:focus{
+    transition: .5s;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black;
+    border: 1px solid rgba(0, 0, 0, 0.586);
+}
+
+.buttoncss{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: black;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.textcss{
+    padding-left: 7px;
+}
+
+
+.radio-signupcontainer {
+    display: block;
+    margin: auto;
+    max-width: 10em;
+    position: relative;
+  }
+  
+  
+  .signupcontainer label span {
+    box-shadow: 0 0 0 0.2em currentColor inset, 0 0.2em 0.2em rgba(0, 0, 0, 0.2), 0 0.3em 0.2em rgba(0, 0, 0, 0.2) inset;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: bottom;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    transition: transform 0.2s cubic-bezier(0.5, 0, 0.5, 2), box-shadow 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95), color 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  
+  .signupcontainer input:checked + label,
+  .signupcontainer input:checked + label span {
+    color: #255ff4;
+  }
+  
+  .signupcontainer input:checked + label,
+  .signupcontainer input:checked + label span {
+    transition-delay: 0.4s;
+  }
+  
+  .signupcontainer label span {
+    transform: scale(1.2);
+  }
