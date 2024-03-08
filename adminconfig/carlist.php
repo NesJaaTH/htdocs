@@ -51,7 +51,7 @@
 	
 	<body>
 	<div class="edit" id="edit" style="display: none;">
-		<form action="/assets/php/updatecar.php" method="post" class="signupcontainer"> 
+		<form action="/assets/php/updatecar.php" method="post" class="signupcontainer" enctype="multipart/form-data"> 
 			<label class="hertop">EDIT</label><br><br>
 			<label for="ID">ID</label><br>
 			<input class="textcss" type="text" id="ID" name="ID" value="no" readonly><br>
@@ -78,6 +78,9 @@
 
 			<label for="end_renting">Pirce</label><br>
 			<input class="textcss" type="text" id="end_renting" name="p" value="no"><br><br>
+
+			<label for="end_renting">IMG</label><br>
+			<input type="file" class="textcssimg" name="file"><br><br>
 
 			<input class="buttoncss" type="submit" value="SAVE">
 			<input class="buttoncss" type="button" value="CLOSE" onclick="closeed()"><br><br>
@@ -122,7 +125,7 @@
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                     <i class="fa fa-bars"></i>
                                 </button>
-                                <a class="navbar-brand" href="index.html">carvilla<span></span></a>
+                                <a class="navbar-brand" onclick="document.location='http://localhost/user/userindex.php'">carvilla<span></span></a>
 
                             </div><!--/.navbar-header-->
                             <!-- End Header Navigation -->

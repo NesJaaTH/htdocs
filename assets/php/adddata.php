@@ -4,7 +4,7 @@
     session_start();
     ob_start();
 
-    if ($_SESSION['access_rights'] === "Admin"){
+    if ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -28,6 +28,7 @@
         $conn->close();
         echo "OK";
     }else{
+        session_destroy();
         header('location:http://localhost/indexshop.php');
     }
         

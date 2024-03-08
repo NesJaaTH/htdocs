@@ -226,7 +226,9 @@
 		</section><!--/.welcome-hero-->
 		<!--welcome-hero end -->
 		<section id="brand"  class="brand">
+			<div class="img-sql" id="get-image">
 
+			</div>
 
 		</section><!--/brand-->	
 		<!--brand end -->

@@ -27,6 +27,7 @@
 
         $conn->close();
     }else{
+        session_destroy();
         header('location:http://localhost/indexshop.php');
     }
 ?>

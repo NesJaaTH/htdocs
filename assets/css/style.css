@@ -682,4 +682,15 @@ nav.navbar.bootsnav .navbar-toggle i{color: #4e4ffa;}
     0%   {bottom:0px;}
     100%  {bottom:7px;}
 }
-/*========================Thank you=================
+
+.img-sql , .img-css, .label-css{
+    display: flex;
+    margin-top: 33px;
+    position: relative;
+    height: 10%;
+    width: 30%;
+    transform: translate(360px, 0px);
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}

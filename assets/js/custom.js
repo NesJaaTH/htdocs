@@ -92,18 +92,21 @@ $(document).ready(function(){
 						var html_append_3 = "";
 						var html_append_4 = "";
 						var html_append_5 = "";
+						var html_img = "";
 						$.each(data,function(index,value){
 							html_append_1 += "<option value='"+value.car_registration+"-"+value.car_id+"'>"+value.car_registration+"</option>";
 							html_append_2 += "<option value='"+value.car_motorbike+"-"+value.car_id+"'>"+value.car_motorbike+"</option>";
 							html_append_3 += "<option value='"+value.color_car+"-"+value.car_id+"'>"+value.color_car+"</option>";
 							html_append_4 += "<option value='"+value.carmodel+"-"+value.car_id+"'>"+value.carmodel+"</option>";
 							html_append_5 += "<option value='"+value.pirce+"-"+value.car_id+"'>"+value.pirce+"</option>";
+							html_img += "<label for="+value.car_registration+"-"+value.car_id+" class=\"label-css\">"+value.car_registration+"</label><img class=\"img-css\" src=\"/assets/images/uploads/"+ value.car_img +"\" alt=\"\">";
 						});
 						$("#registration").html(html_append_1);
 						$("#bodystyle").html(html_append_2);
 						$("#color").html(html_append_3);
 						$("#model").html(html_append_4);
 						$("#pirce").html(html_append_5);
+						$('#get-image').html(html_img);
 						console.log(data);
 					}
 
