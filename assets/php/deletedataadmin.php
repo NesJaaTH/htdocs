@@ -16,11 +16,11 @@
         }
         $id = $_GET['page'];
 
-        $sql = "DELETE FROM customer WHERE user_id='$id';";
+        $sql = "DELETE FROM employee WHERE employee_id='$id';";
 
         if ($conn->query($sql) === TRUE) {
             echo "Record updated successfully";
-            header('location:http://localhost/adminconfig/config.php');
+            header('location:http://localhost/adminconfig/Admin.php');
         } else {
             echo "Error updating record: " . $conn->error;
         }

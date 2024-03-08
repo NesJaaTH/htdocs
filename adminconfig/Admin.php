@@ -9,7 +9,7 @@
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		session_start();
 		ob_start();
-		if ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
+		if ($_SESSION['access_rights'] === "Admin"){
 			$username_db = $_SESSION['user_name'];
 		}else{
 			session_destroy();
@@ -55,29 +55,54 @@
 			<label class="hertop">EDIT</label><br><br>
 			<label for="ID">ID</label><br>
 			<input class="textcss" type="text" id="ID" name="user_id" value="no" readonly><br>
-			<label for="username">Username</label><br>
-			<input class="textcss" type="text" id="username" name="username" value="no"><br>
 
-			<label for="fname">F_name</label><br>
+			<label for="fname">First name</label><br>
 			<input class="textcss" type="text" id="fname" name="fname" value="no"><br>
 
-			<label for="lname">L_name</label><br>
+			<label for="lname">Last name</label><br>
 			<input class="textcss" type="text" id="lname" name="lname" value="no"><br>
 
-			<label for="id_crad_Passport">id_crad_Passport</label><br>
-			<input class="textcss" type="text" id="id_crad_Passport" name="id_crad_Passport" value="no"><br>
+			<label for="id_card">ID Card</label><br>
+			<input class="textcss" type="text" id="id_card" name="id_card" value="no"><br>
 
-			<label for="car_license">car_license</label><br>
-			<input class="textcss" type="text" id="car_license" name="car_license" value="no"><br>
+			<label for="salay">Salay</label><br>
+			<input class="textcss" type="text" id="salay" name="salay" value="no"><br>
 
-			<label for="rentedcar">rentedcar</label><br>
-			<input class="textcss" type="text" id="rentedcar" name="rentedcar" value="no"><br>
+			<label for="age">Age</label><br>
+			<input class="textcss" type="text" id="age" name="age" value="no"><br><br>
 
-			<label for="start_Renting">start_Renting</label><br>
-			<input class="textcss" type="text" id="start_Renting" name="start_Renting" value="no"><br>
+			<label for="ar">Access Rights</label><br>
+			<input class="textcss" type="text" id="ar" name="ar" value="no"><br><br>
 
-			<label for="end_renting">end_renting</label><br>
-			<input class="textcss" type="text" id="end_renting" name="end_renting" value="no"><br><br>
+
+			<input class="buttoncss" type="submit" value="SAVE">
+			<input class="buttoncss" type="button" value="CLOSE" onclick="closeed()"><br><br>
+		</form> 
+	</div>
+	<div class="adddate" id="adddate" style="display: none;">
+		<form action="/assets/php/adddataadmin.php" method="post" class="adddate-css"> 
+			<label class="hertop">Add Data Admin user</label><br><br>
+			<label for="f_name">First name</label><br>
+			<input class="textcss" type="text" id="f_name" name="f_name" value=""><br>
+
+			<label for="l_name">Last name</label><br>
+			<input class="textcss" type="text" id="l_name" name="l_name" value=""><br>
+
+			<label for="password_user">Password</label><br>
+			<input class="textcss" type="password" id="password_user" name="password_user"><br>
+
+
+			<label for="id_card">ID Card</label><br>
+			<input class="textcss" type="text" id="id_card" name="id_card" value=""><br>
+
+			<label for="salay">Salay</label><br>
+			<input class="textcss" type="text" id="salay" name="salay" value=""><br>
+
+			<label for="age">Age</label><br>
+			<input class="textcss" type="text" id="age" name="age" value=""><br>
+
+			<label for="ar">Access Rights</label><br>
+			<input class="textcss" type="text" id="ar" name="ar" value=""><br><br>
 
 			<input class="buttoncss" type="submit" value="SAVE">
 			<input class="buttoncss" type="button" value="CLOSE" onclick="closeed()"><br><br>
@@ -106,14 +131,8 @@
                             <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                                     <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/user/userindex.php'">home</a></li>
-									<?php
-										if ($_SESSION['access_rights'] === "Admin"){
-											echo "<li class='scroll'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/Admin.php\"'>Admin</a></li>";
-											echo "<li class='scroll active'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/config.php\"'>Member</a></li>";
-										}elseif ($_SESSION['access_rights'] === "Staff"){
-											echo "<li class='scroll active'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/config.php\"'>Member</a></li>";
-										}
-									?>
+                                    <li class="scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost/adminconfig/config.php'">ADMIN</a></li>
+									<li class='scroll'><a style='cursor: pointer;' onclick='document.location="http://localhost/adminconfig/config.php"'>Member</a></li>
 									<li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/adminconfig/carlist.php'">Car List</a></li>
 									<div class="dropdown">
 										<button id="myBtn" class="dropbtn"><?=$username_db?></button>
@@ -134,43 +153,54 @@
 
 			<div class="container">
 				<div class="welcome-hero-txt">
-					<input type="text" class="form-control" id="live_search" autocomplete="off" placeholder="Serach....Name"><br>
-                    <div id="searchresult"></div>
-					<table class="table" id="table-all" style="display: block;">
+					<input type="text" class="form-control" id="live_search_admin" autocomplete="off" placeholder="Serach....Name"><br>
+                    <div id="searchresultadmin"></div>
+					<table class="table" id="table-admin">
                         <thead class="thead">
 							<?php
-								$sql = "SELECT * FROM customer;";
+								$sql = "SELECT * FROM employee;";
 								$query = $conn->prepare($sql);
 								$query->execute();
 							?>
                             <tr>
 								<th scope="col" class="th-css">ID</th>
-								<th scope="col" class="th-css">name</th>
-								<th scope="col" class="th-css">username</th>
-								<th scope="col" class="th-css">ID CRAD and PASSPORT</th>
-								<th scope="col" class="th-css">CAR LICENSE</th>
-								<th scope="col" class="th-css">RENTEDCAR</th>
-								<th scope="col" class="th-css">START RENTING</th>
-								<th scope="col" class="th-css">END RENTING</th>
+								<th scope="col" class="th-css">Name</th>
+								<th scope="col" class="th-css">ID Crad</th>
+								<th scope="col" class="th-css">Salary</th>
+								<th scope="col" class="th-css">Age</th>
+								<th scope="col" class="th-css">Access Rights</th>
 								<th scope="col" class="th-css">Action</th>
                             </tr>
                         </thead>
                         <tbody class="tbody">
 							<?php 
-								foreach ($query as $row) { ?>
+								foreach ($query as $row) { 
+								if ($row['access_rights'] == 'A'){
+									$access = "Admin";
+								}elseif ($row['access_rights'] == 'S'){
+									$access = "Staff";
+								}
+								?>
 										
 								<tr>
-									<td scope="row"><?=$row['user_id'] ?></td>
+									<td scope="row"><?=$row['employee_id'] ?></td>
 									<td scope="row"><?=$row['f_name'] ?> <?=$row['l_name']?></td>
-									<td scope="row"><?=$row['username'] ?></td>
-									<td scope="row"><?=$row['id_cradandpassport'] ?></td>
-									<td scope="row"><?=$row['car_license'] ?></td>
-									<td scope="row"><?=$row['rentedcar'] ?></td>
-									<td scope="row"><?=$row['start_renting'] ?></td>
-									<td scope="row"><?=$row['end_renting'] ?></td>
-									<td scope="row" class="id-<?=$row['user_id']?>"><i class="fa-regular fa-pen-to-square" style="cursor: pointer;" onclick="onedit('<?=$row['user_id']?>','<?=$row['f_name'] ?>','<?=$row['l_name']?>','<?=$row['username'] ?>','<?=$row['id_cradandpassport'] ?>','<?=$row['car_license'] ?>','<?=$row['rentedcar'] ?>','<?=$row['start_renting'] ?>','<?=$row['end_renting'] ?>')"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-trash" style="cursor: pointer;" onclick="deletedata('<?=$row['user_id']?>')"></i></td>
+									<td scope="row"><?=$row['ID_card'] ?></td>
+									<td scope="row"><?=$row['salary'] ?></td>
+									<td scope="row"><?=$row['age'] ?></td>
+									<td scope="row"><?=$access ?></td>
+									<td scope="row" class="id-<?=$row['employee_id']?>"><i class="fa-regular fa-pen-to-square" style="cursor: pointer;" onclick="onedit('<?=$row['employee_id']?>','<?=$row['f_name'] ?>','<?=$row['l_name']?>','<?=$row['ID_card'] ?>','<?=$row['salary'] ?>','<?=$row['age'] ?>','<?=$row['access_rights'] ?>')"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-trash" style="cursor: pointer;" onclick="deletedata('<?=$row['employee_id']?>')"></i></td>
 								</tr>
 							<?php } ?>
+								<tr>
+									<td scope="row"></td>
+									<td scope="row"></td>
+									<td scope="row"></td>
+									<td scope="row"></td>
+									<td scope="row"></td>
+									<td scope="row"></td>
+                                    <td scope="row"><i class="fa-solid fa-plus" style="cursor: pointer;" onclick="adddate()"></i></td>
+                                </tr>
 
                         </tbody>
                     </table>
@@ -283,20 +313,24 @@
 			
         </footer>
         <script>
-			function onedit(id,fname,lname,username,id_crad,carl,rentedcar,sr,er,smp){
+			function onedit(id,fname,lname,idcard,sa,age,ar){
+				if (ar == "A") {
+					ar = "Admin";
+				}else if(ar == "S"){
+					ar = "Staff";
+				}
 				document.getElementById("edit").style.display = "block";
 				document.getElementById("ID").value = id;
-				document.getElementById("username").value = username;
 				document.getElementById("fname").value = fname;
 				document.getElementById("lname").value = lname;
-				document.getElementById("id_crad_Passport").value = id_crad;
-				document.getElementById("car_license").value = carl;
-				document.getElementById("rentedcar").value = rentedcar;
-				document.getElementById("start_Renting").value = sr;
-				document.getElementById("end_renting").value = er;
+				document.getElementById("id_card").value = idcard;
+				document.getElementById("salay").value = sa;
+				document.getElementById("age").value = age;
+				document.getElementById("ar").value = ar;
 			}
 			function closeed(){
 				document.getElementById("edit").style.display = "none";
+				document.getElementById("adddate").style.display = "none";
 			}
 			function deletedata(user_id){
 				Swal.fire({
@@ -316,11 +350,14 @@
 							showConfirmButton: false,
 						});
 						setInterval(() => {
-							window.location.assign("http://localhost/assets/php/deletedata.php?page=" + user_id);
+							window.location.assign("http://localhost/assets/php/deletedataadmin.php?page=" + user_id);
 						}, 1000);
 					}
 				});
 			}
+			function adddate(){
+                document.getElementById("adddate").style.display = "block";
+            }
 		</script>
 		<script src="/assets/js/jquery.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

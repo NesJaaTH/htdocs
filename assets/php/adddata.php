@@ -28,7 +28,7 @@
         $conn->close();
         echo "OK";
     }else{
-        header('location:http://localhost');
+        header('location:http://localhost/indexshop.php');
     }
         
 ?>

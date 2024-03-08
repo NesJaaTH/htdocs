@@ -2,14 +2,13 @@
     include "/xampp/htdocs/assets/php/connect.php";
 	session_start();
 	ob_start();
-
-    if ($_SESSION['access_rights'] === "Member"){
+    if ($_SESSION['access_rights'] === "Member" || $_SESSION['access_rights'] === "Staff" || $_SESSION['access_rights'] === "Admin"){
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 		$username = $_SESSION['user_name'];
     }else{
-        header('location:http://localhost');
+        header('location:http://localhost/indexshop.php');
     }
 ?>
 
@@ -93,7 +92,7 @@
 								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 									<i class="fa fa-bars"></i>
 								</button>
-								<a class="navbar-brand" style="cursor: pointer;" onclick="document.location='http://localhost'">carvilla<span></span></a>
+								<a class="navbar-brand" style="cursor: pointer;" onclick="document.location='http://localhost/indexshop.php'">carvilla<span></span></a>
 
 							</div><!--/.navbar-header-->
 							<!-- End Header Navigation -->
@@ -101,12 +100,23 @@
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 								<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-									<li class=" scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost'">home</a></li>
+									<li class=" scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost/indexshop.php'">home</a></li>
 									<li class="scroll"><a href="#contact">contact</a></li>
 									<div class="dropdown">
 										<button id="myBtn" class="dropbtn"><?=$username?></button>
 										<div id="myDropdown" class="dropdown-content">
-											<a style="cursor: pointer;" onclick="document.location='http://localhost/assets/php/logout.php'"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a>
+										<?php
+												if ($_SESSION['access_rights'] === "Member"){
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+												} elseif ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
+													echo "<a id='adminsetting' style='cursor: pointer;'><i class='fa-solid fa-gear'></i> Admin setting</a>";
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+													
+
+												}else{
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+												}
+											?>
 										</div>
 									</div>
 								</ul><!--/.nav -->
@@ -130,106 +140,79 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="model-search-content">
-							<div class="row">
+							<div class="row" id="search-by-price">
 								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>Car Brand</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">year</option><!-- /.option-->
-
-											  	<option value="2018">2018</option><!-- /.option-->
-
-											  	<option value="2017">2017</option><!-- /.option-->
-											  	<option value="2016">2016</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
+									<form action="" id="buying" style="display: block;">
+										<div class="single-model-search">
+											<h2>Car Brand</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id="brand">
+													<?php
+														$sql = "SELECT DISTINCT car_brand FROM car_models";
+														$query = mysqli_query($conn, $sql);
+														while ($row = mysqli_fetch_assoc($query)){
+															echo "<option value='". $row['car_brand'] ."-". $_SESSION['db_id'] ."-".$_SESSION['access_rights']."'>". $row['car_brand']. "</option>";
+														}
+													?>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
+										<div class="single-model-search">
+											<h2>Car Registration</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id ="registration" name="registration">
+													<option value="NULL" id="registration">NULL</option>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
 									</div>
-									<div class="single-model-search">
-										<h2>Car Registration</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
+								</form>
 
-											  	<option value="default">style</option><!-- /.option-->
-
-											  	<option value="sedan">sedan</option><!-- /.option-->
-
-											  	<option value="van">van</option><!-- /.option-->
-											  	<option value="roadster">roadster</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
+								<form action="" id="buying" style="display: block;">
+									<div class="col-md-offset-1 col-md-2 col-sm-12">
+										<div class="single-model-search">
+											<h2>body Style</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id="bodystyle">
+													<option value="NULL" id="registration">NULL</option>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
+										<div class="single-model-search">
+											<h2>Select Color</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id="color">
+													<option value="NULL" id="registration">NULL</option>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
 									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>body Style</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
+								</form>
 
-											  	<option value="default">make</option><!-- /.option-->
-
-											  	<option value="toyota">toyota</option><!-- /.option-->
-
-											  	<option value="holden">holden</option><!-- /.option-->
-											  	<option value="maecedes-benz">maecedes-benz.</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>Pirce</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">condition</option><!-- /.option-->
-
-											  	<option value="something">something</option><!-- /.option-->
-
-											  	<option value="something">something</option><!-- /.option-->
-											  	<option value="something">something</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>Select Model</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">model</option><!-- /.option-->
-
-											  	<option value="kia-rio">kia-rio</option><!-- /.option-->
-
-											  	<option value="mitsubishi">mitsubishi</option><!-- /.option-->
-											  	<option value="ford">ford</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>Select Color</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">price</option><!-- /.option-->
-
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
+								<form action="" id="buying" style="display: block;">
+									<div class="col-md-offset-1 col-md-2 col-sm-12">
+										<div class="single-model-search">
+											<h2>Select Model</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id="model">
+													<option value="NULL" id="registration">NULL</option>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
+										<div class="single-model-search">
+											<h2>Pirce</h2>
+											<div class="model-select-icon">
+												<select class="form-control" id="pirce">
+													<option value="NULL" id="registration">NULL</option>
+												</select><!-- /.select-->
+											</div><!-- /.model-select-icon -->
+										</div>
+								</form>
+									
 								</div>
 								<div class="col-md-2 col-sm-12">
 									<div class="single-model-search text-center">
-										<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
+										<button class="welcome-btn model-search-btn" id="submit-conbuying">
 											search
 										</button>
 									</div>
@@ -378,13 +361,15 @@
         <script src="/assets/js/owl.carousel.min.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 		<script src="https://kit.fontawesome.com/e35da9db05.js" crossorigin="anonymous"></script>
 
         <!--Custom JS-->
         <script src="/assets/js/custom.js"></script>
 		<script src="/assets/js/logout.js"></script>
-        
+		<script src="/assets/js/butt.js"></script>
+		<script src="/assets/js/buy.js"></script>
     </body>
 	
 </html>

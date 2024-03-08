@@ -2,14 +2,18 @@
     include "/xampp/htdocs/assets/php/connect.php";
 	session_start();
 	ob_start();
-
     if ($_SESSION['access_rights'] === "Member"){
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 		$username = $_SESSION['user_name'];
-    }else{
-        header('location:http://localhost');
+    }elseif ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
+		if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+		$username = $_SESSION['user_name'];
+	}else{
+        header('location:http://localhost/indexshop.php');
     }
 ?>
 
@@ -111,7 +115,18 @@
 									<div class="dropdown">
 										<button id="myBtn" class="dropbtn"><?=$username?></button>
 										<div id="myDropdown" class="dropdown-content">
-											<a style="cursor: pointer;" onclick="document.location='http://localhost/assets/php/logout.php'"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a>
+											<?php
+												if ($_SESSION['access_rights'] === "Member"){
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+												} elseif ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
+													echo "<a id='adminsetting' style='cursor: pointer;'><i class='fa-solid fa-gear'></i> Admin setting</a>";
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+													
+
+												}else{
+													echo "<a id='logoutuser' style='cursor: pointer;'><i class='fa-solid fa-right-from-bracket'></i> LOGOUT</a>";
+												}
+											?>
 										</div>
 									</div>
 								</ul><!--/.nav -->
@@ -666,6 +681,7 @@
 		<!--Custom JS-->
 		<script src="/assets/js/custom.js"></script>
 		<script src="/assets/js/logout.js"></script>
+		<script src="/assets/js/butt.js"></script>
 		
 	</body>
 	

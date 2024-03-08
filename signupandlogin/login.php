@@ -2,14 +2,12 @@
 	include "/xampp/htdocs/assets/php/connect.php";
 	session_start();
 	ob_start();
-	$Incorrect = 'none';
     if ($_SESSION['Incorrect'] === "Incorrect"){
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-		$Incorrect = $_SESSION['Incorrect'];
     }else{
-
+		$_SESSION['Incorrect']=('none');
     }
 ?>
 
@@ -71,7 +69,7 @@
 
     </head>
 	<?php 
-		if($Incorrect == "none"){
+		if($_SESSION['Incorrect'] === "none"){
 			echo '<body>';
 		} else {
 			echo '<body onload="Incorrect()">';
@@ -107,7 +105,7 @@
 				            <!-- Collect the nav links, forms, and other content for toggling -->
 				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-				                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost'">home</a></li>
+				                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/indexshop.php'">home</a></li>
 									<li class="scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost/signupandlogin/login.php'">Login</a></li>
 									<li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/signupandlogin/signup.php'">Sign up</a></li>
 				                </ul><!--/.nav -->

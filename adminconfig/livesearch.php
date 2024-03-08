@@ -99,5 +99,53 @@
         }else{
             echo "<h6 style='color: #ffff;'>No data Found</h6><br><br><br><br><br>";
         }
+    } elseif(isset($_POST['inputadmin'])){
+        $input = $_POST['inputadmin'];
+
+        $query = "SELECT * FROM employee WHERE employee_id LIKE '{$input}%' OR f_name LIKE '{$input}%' OR l_name LIKE '{$input}%' OR ID_card LIKE '{$input}%' 
+                                OR salary LIKE '{$input}%' OR age LIKE '{$input}%' OR access_rights LIKE '{$input}%'";
+
+        $result = mysqli_query($conn,$query);
+        if(mysqli_num_rows($result)>0){?> 
+            
+            <table class="table" id="table-admin">
+                <thead>
+                    <tr>
+                        <th scope="col" class="th-css">ID</th>
+                        <th scope="col" class="th-css">Name</th>
+                        <th scope="col" class="th-css">ID Crad</th>
+                        <th scope="col" class="th-css">Salary</th>
+                        <th scope="col" class="th-css">Age</th>
+                        <th scope="col" class="th-css">Access Rights</th>
+                        <th scope="col" class="th-css">Action</th>
+                    </tr>
+                    <tbody class="tbody">
+                        <?php 
+                            while ($row = mysqli_fetch_assoc($result)){ 
+                                if ($row['access_rights'] == 'A'){
+                                    $access = "Admin";
+                                }elseif ($row['access_rights'] == 'S'){
+                                    $access = "Staff";
+                                }
+                                ?>
+                                <tr>
+                                    <td scope="row"><?=$row['employee_id'] ?></td>
+									<td scope="row"><?=$row['f_name'] ?> <?=$row['l_name']?></td>
+									<td scope="row"><?=$row['ID_card'] ?></td>
+									<td scope="row"><?=$row['salary'] ?></td>
+									<td scope="row"><?=$row['age'] ?></td>
+									<td scope="row"><?=$access ?></td>
+									<td scope="row" class="id-<?=$row['employee_id']?>"><i class="fa-regular fa-pen-to-square" style="cursor: pointer;" onclick="onedit('<?=$row['employee_id']?>','<?=$row['f_name'] ?>','<?=$row['l_name']?>','<?=$row['ID_card'] ?>','<?=$row['salary'] ?>','<?=$row['age'] ?>','<?=$row['access_rights'] ?>')"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-trash" style="cursor: pointer;" onclick="deletedata('<?=$row['employee_id']?>')"></i></td>
+								</tr>
+                            <?php } ?>
+                    </tbody>
+                </thead>
+
+            </table>
+    
+            <?php
+        }else{
+            echo "<h6 style='color: #ffff;'>No data Found</h6><br><br><br><br><br>";
+        }
     }
 ?>

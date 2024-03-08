@@ -55,6 +55,66 @@ $(document).ready(function(){
 				$("#table-allcar").css("display","inline-table");
 			}
 		})
+
+		$("#live_search_admin").keyup(function(){
+			var input = $(this).val();
+			if(input != ""){
+				$.ajax({
+					url:"livesearch.php",
+					method: "POST",
+					data:{inputadmin:input},
+
+					success:function(data){
+						$("#searchresultadmin").html(data);
+						$("#searchresultadmin").css("display","block");
+						$("#table-admin").css("display","none");
+					}
+				});
+			}else{
+				$("#searchresultadmin").css("display","none");
+				$("#table-admin").css("display","inline-table");
+			}
+		})
+
+		$("#brand").on("change",function(){
+			var input = $("#brand").val();
+			let id_db = input.split('-');
+			console.log(id_db[0]);
+			if(input != ""){
+				$.ajax({
+					url:"rentcar_live.php",
+					method: "POST",
+					data:{rentcar:id_db[0]},
+					dataType:"json",
+					success:function(data){
+						var html_append_1 = "";
+						var html_append_2 = "";
+						var html_append_3 = "";
+						var html_append_4 = "";
+						var html_append_5 = "";
+						$.each(data,function(index,value){
+							html_append_1 += "<option value='"+value.car_registration+"-"+value.car_id+"'>"+value.car_registration+"</option>";
+							html_append_2 += "<option value='"+value.car_motorbike+"-"+value.car_id+"'>"+value.car_motorbike+"</option>";
+							html_append_3 += "<option value='"+value.color_car+"-"+value.car_id+"'>"+value.color_car+"</option>";
+							html_append_4 += "<option value='"+value.carmodel+"-"+value.car_id+"'>"+value.carmodel+"</option>";
+							html_append_5 += "<option value='"+value.pirce+"-"+value.car_id+"'>"+value.pirce+"</option>";
+						});
+						$("#registration").html(html_append_1);
+						$("#bodystyle").html(html_append_2);
+						$("#color").html(html_append_3);
+						$("#model").html(html_append_4);
+						$("#pirce").html(html_append_5);
+						console.log(data);
+					}
+
+	
+				});
+			}else{
+				$("#search-by-price").css("display","none");
+				$("#buying").css("display","block");
+				console.log("no");
+			}
+		})
     // 1. Scroll To Top 
 		$(window).on('scroll',function () {
 			if ($(this).scrollTop() > 300) {

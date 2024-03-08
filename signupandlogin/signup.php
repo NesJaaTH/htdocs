@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	ob_start();
-	session_destroy();
+	$_SESSION['Incorrect']=('none');
 ?>
 
 <!doctype html>
@@ -91,7 +91,7 @@
 				            <!-- Collect the nav links, forms, and other content for toggling -->
 				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-				                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost'">home</a></li>
+				                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/indexshop.php'">home</a></li>
 									<li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/signupandlogin/login.php'">Login</a></li>
 									<li class="scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost/signupandlogin/signup.php'">Sign up</a></li>
 				                </ul><!--/.nav -->
@@ -131,23 +131,12 @@
 						<label for="car_license">Car license</label><br>
 						<input class="textcss" type="text" id="car_license" name="car_license"><br><br>
 
-						<input class="buttoncss" type="submit" value="Sign UP">
+						<input class="buttoncss" type="submit" value="Sign UP"><br><br>
 					</form> 
 				</div>
 			</div>
 			
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
-
-		<!--service end-->
-
-		<!--new-cars start -->
-		<!--new-cars end -->
-
-		<!--featured-cars start -->
-
-		<!-- clients-say strat -->
-
+		</section>
 		<!--blog start -->
 		<section id="blog" class="blog"></section><!--/.blog-->
 		<!--blog end -->

@@ -1,14 +1,7 @@
 <?php
 	session_start();
 	ob_start();
-	$_SESSION['access_rights']=('user');
-	if ($_SESSION['access_rights'] === "Member"){
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-		header('location:http://localhost/user/userindex.php');
-    }else{
-	}
+	$_SESSION['Incorrect']=('none');
 ?>
 
 <!doctype html>
@@ -29,7 +22,7 @@
 		<!-- title of site -->
 		<title>CarVilla</title>
 		<!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="/assets/logo/favicon.png"/>
 		<!--font-awesome.min.css-->
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
@@ -89,7 +82,7 @@
 								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 									<i class="fa fa-bars"></i>
 								</button>
-								<a class="navbar-brand" style="cursor: pointer;" onclick="document.location='http://localhost'">carvilla<span></span></a>
+								<a class="navbar-brand" style="cursor: pointer;" onclick="document.location='http://localhost/indexshop.php'">carvilla<span></span></a>
 
 							</div><!--/.navbar-header-->
 							<!-- End Header Navigation -->
@@ -122,121 +115,7 @@
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore   magna aliqua. 
 					</p>
-					<button class="welcome-btn" style="cursor: pointer;" onclick="document.location='http://localhost/rentcar/rentcar.php'">contact us</button>
-				</div>
-			</div>
-
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="model-search-content">
-							<div class="row">
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select year</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">year</option><!-- /.option-->
-
-												<option value="2018">2018</option><!-- /.option-->
-
-												<option value="2017">2017</option><!-- /.option-->
-												<option value="2016">2016</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>body style</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">style</option><!-- /.option-->
-
-												<option value="sedan">sedan</option><!-- /.option-->
-
-												<option value="van">van</option><!-- /.option-->
-												<option value="roadster">roadster</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select make</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">make</option><!-- /.option-->
-
-												<option value="toyota">toyota</option><!-- /.option-->
-
-												<option value="holden">holden</option><!-- /.option-->
-												<option value="maecedes-benz">maecedes-benz.</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>car condition</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">condition</option><!-- /.option-->
-
-												<option value="something">something</option><!-- /.option-->
-
-												<option value="something">something</option><!-- /.option-->
-												<option value="something">something</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select model</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">model</option><!-- /.option-->
-
-												<option value="kia-rio">kia-rio</option><!-- /.option-->
-
-												<option value="mitsubishi">mitsubishi</option><!-- /.option-->
-												<option value="ford">ford</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>select price</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-												<option value="default">price</option><!-- /.option-->
-
-												<option value="$0.00">$0.00</option><!-- /.option-->
-
-												<option value="$0.00">$0.00</option><!-- /.option-->
-												<option value="$0.00">$0.00</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-2 col-sm-12">
-									<div class="single-model-search text-center">
-										<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
-											search
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<button class="welcome-btn" style="cursor: pointer;" onclick="document.location='http://localhost/signupandlogin/login.php'">contact us</button>
 				</div>
 			</div>
 

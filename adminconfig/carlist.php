@@ -9,10 +9,11 @@
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		session_start();
 		ob_start();
-		if ($_SESSION['access_rights'] === "Admin"){
-			$username = $_SESSION['user_name'];
+		if ($_SESSION['access_rights'] === "Admin" || $_SESSION['access_rights'] === "Staff"){
+			$username_db = $_SESSION['user_name'];
 		}else{
-			header('location:http://localhost');
+			session_destroy();
+			header('location:http://localhost/indexshop.php');
 		}
 	} catch(PDOException $e){
 		echo "Error" . $e->getMessage();
@@ -129,11 +130,19 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost'">home</a></li>
-                                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/adminconfig/config.php'">ADMIN</a></li>
-									<li class="scroll active"><a style="cursor: pointer;" onclick="document.location='http://localhost/adminconfig/carlist.php'">Car List</a></li>
+                                    <li class="scroll"><a style="cursor: pointer;" onclick="document.location='http://localhost/user/userindex.php'">home</a></li>
+									<?php
+										if ($_SESSION['access_rights'] === "Admin"){
+											echo "<li class='scroll'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/Admin.php\"'>Admin</a></li>";
+											echo "<li class='scroll'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/config.php\"'>Member</a></li>";
+											echo "<li class='scroll active'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/config.php\"'>Member</a></li>";
+										}elseif ($_SESSION['access_rights'] === "Staff"){
+											echo "<li class='scroll'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/config.php\"'>Member</a></li>";
+											echo "<li class='scroll active'><a style='cursor: pointer;' onclick='document.location=\"http://localhost/adminconfig/carlist.php\"'>Carlist</a></li>";
+										}
+									?>
 									<div class="dropdown">
-										<button id="myBtn" class="dropbtn"><?=$username?></button>
+										<button id="myBtn" class="dropbtn"><?=$username_db?></button>
 										<div id="myDropdown" class="dropdown-content">
 											<a style="cursor: pointer;" onclick="document.location='http://localhost/assets/php/logout.php'"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</a>
 										</div>

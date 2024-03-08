@@ -9,12 +9,12 @@
             die("Connection failed: " . $conn->connect_error);
         }
         session_destroy();
-        header('location:http://localhost');
+        header('location:http://localhost/indexshop.php');
         $conn->close();
         die();
     }else{
         session_destroy();
-        header('location:http://localhost');
+        header('location:http://localhost/indexshop.php');
         $conn->close();
         die();
     }
