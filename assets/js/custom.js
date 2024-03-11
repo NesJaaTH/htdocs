@@ -99,14 +99,14 @@ $(document).ready(function(){
 							html_append_3 += "<option value='"+value.color_car+"-"+value.car_id+"'>"+value.color_car+"</option>";
 							html_append_4 += "<option value='"+value.carmodel+"-"+value.car_id+"'>"+value.carmodel+"</option>";
 							html_append_5 += "<option value='"+value.pirce+"-"+value.car_id+"'>"+value.pirce+"</option>";
-							html_img += "<label for="+value.car_registration+"-"+value.car_id+" class=\"label-css\">"+value.car_registration+"</label><img class=\"img-css\" src=\"/assets/images/uploads/"+ value.car_img +"\" alt=\"\">";
+							html_img += "<div class=\"col-md-4 col-sm-6\"><div class=\"single-service-item\"><div class=\"single-service-icon\"><img src=\"/assets/images/uploads/"+ value.car_img +"\" alt=\"\"></div><h2>"+value.car_registration+"</h2></div></div>"
 						});
 						$("#registration").html(html_append_1);
 						$("#bodystyle").html(html_append_2);
 						$("#color").html(html_append_3);
 						$("#model").html(html_append_4);
 						$("#pirce").html(html_append_5);
-						$('#get-image').html(html_img);
+						$('#service-content').html(html_img);
 						console.log(data);
 					}
 

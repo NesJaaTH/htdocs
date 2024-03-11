@@ -222,15 +222,19 @@
 					</div>
 				</div>
 			</div>
-
 		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
-		<section id="brand"  class="brand">
-			<div class="img-sql" id="get-image">
+		<div class="clearfix"></div>
+		<section id="service" class="service-ren">
+			<div class="container">
+				<div class="service-content">
+					<div class="row"id="service-content">
+					</div>
+				</div>
+			</div><!--/.container-->
 
-			</div>
-
-		</section><!--/brand-->	
+		</section><!--/.service-->
+		<!--service end-->
+	
 		<!--brand end -->
 
 		<!--blog start -->
